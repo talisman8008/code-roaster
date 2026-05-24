@@ -80,115 +80,61 @@ Code-Roaster/
 
 ---
 
-## Build Phases & Progress
+## Roadmap
 
-### ✅ Phase 0 — Project Setup
-- [x] Root folder structure created (`client/`, `server/`, `extension/`)
-- [x] Git repository initialised
-- [x] Pushed to GitHub — `github.com/talisman8008/code-roaster`
-- [x] `.gitignore` configured — `node_modules/`, `.env`, `dist/` excluded
+### ✅ Phase 1 — Foundation & Authentication
+> Backend server, database connection, and user auth fully working.
 
----
-
-### ✅ Phase 1 — Client Scaffold
-- [x] Vite + React project created
-- [x] Tailwind CSS v3 installed and configured
-- [x] All page components created (placeholder) — Home, Dashboard, Login, Register, History
-- [x] All UI components created (placeholder) — CodeEditor, ScoreCard, CCRChart, DiffView, ModeToggle, Navbar
-- [x] Custom hooks created — `useAuth.js`, `useAnalysis.js`
-- [x] Services layer created — `api.js`
-- [x] Auth context created — `AuthContext.jsx`
-- [x] Unnecessary `App.css` removed (Tailwind only)
+- [x] Node.js + Express server with MongoDB Atlas
+- [x] User registration and login with JWT authentication
+- [x] Password hashing with bcrypt
+- [x] Protected route middleware
+- [x] React + Vite + Tailwind CSS v3 frontend scaffold
 
 ---
 
-### ✅ Phase 2 — Server Foundation
-- [x] Node.js + Express server initialised with ES Modules (`"type": "module"`)
-- [x] Dependencies installed — express, mongoose, dotenv, bcryptjs@2.4.3, jsonwebtoken, cors
-- [x] All server folders created — config, models, routes, controllers, middleware, services, utils
-- [x] `config/db.js` — Mongoose connection to MongoDB Atlas
-- [x] `server/index.js` — Express entry point running on port 5000
-- [x] `.env` configured with PORT, MONGO_URI, JWT_SECRET, GEMINI_API_KEY
-- [x] MongoDB Atlas cluster created and connected ✓
-- [x] All placeholder files created across routes, controllers, services, utils
+### 🔄 Phase 2 — Core Analysis Engine *(in progress)*
+> The heart of the app — AI + static analysis pipeline.
+
+- [ ] SHA-256 caching to avoid duplicate Gemini API calls
+- [ ] Google Gemini AI integration for code feedback
+- [ ] Static analyzers — ESLint (JS), Flake8 (Python), cppcheck (C/C++)
+- [ ] CP Mode vs Dev Mode analysis
+- [ ] Roast Mode vs Professional Review Mode
+- [ ] Scoring across 4 dimensions: readability, efficiency, structure, best practices
+- [ ] Clean Code Rating (CCR) calculation
 
 ---
 
-### ✅ Phase 3 — Database Models
-- [x] `models/Users.js` — schema with name, email, password, timestamps
-- [x] Pre-save bcrypt hook (Mongoose 9 async style — no `next` callback)
-- [x] `matchPassword()` instance method for login
-- [x] `models/Submission.js` — full schema with userId, code, language, mode, tone, hash, scores{}, ccrScore, aiResponse, staticIssues[], fromCache
+### ⏳ Phase 3 — Dashboard & Progress Tracking
+> Making improvement visible over time.
+
+- [ ] Submission history saved per user
+- [ ] Before/after diff view on resubmission
+- [ ] CCR score graph over time (Recharts)
+- [ ] Language-wise performance breakdown
+- [ ] Shareable public report card URL
 
 ---
 
-### ✅ Phase 4 — Authentication
-- [x] `middleware/authMiddleware.js` — JWT verification, attaches `req.user`
-- [x] `controllers/authController.js` — `register()` and `login()` with `generateToken()`
-- [x] `routes/auth.js` — POST `/api/auth/register` and POST `/api/auth/login`
-- [x] **Tested in Postman** — register returns 201 ✓, login returns 200 ✓, JWT token generated ✓
+### ⏳ Phase 4 — Browser Extension
+> Analyse code without leaving LeetCode or CodeChef.
+
+- [ ] Chrome Extension (Manifest V3)
+- [ ] One-click code grab from LeetCode Monaco editor
+- [ ] CodeChef support
+- [ ] Overlay panel showing scores inside the coding platform
+- [ ] JWT auth stored in Chrome extension storage
 
 ---
 
-### 🔄 Phase 5 — Core Analysis Pipeline *(in progress)*
-- [ ] `utils/hashCode.js` — SHA-256 hashing with Node crypto
-- [ ] `utils/promptBuilder.js` — builds Gemini prompt (cp/dev mode, roast/review tone)
-- [ ] `utils/scoreCalculator.js` — computes CCR from 4 dimension scores
-- [ ] `services/geminiService.js` — calls Gemini API, parses JSON response
-- [ ] `services/cacheService.js` — checks MongoDB for duplicate submissions by hash
-- [ ] `services/staticAnalyzer.js` — shells out to ESLint/Flake8/cppcheck
-- [ ] `controllers/analyzeController.js` — orchestrates full analysis pipeline
-- [ ] `routes/analyze.js` — protected POST `/api/analyze`
-- [ ] Tested in Postman — code in, scores out ✓
+### ⏳ Phase 5 — Deploy & Launch
+> Getting it live and in front of real users.
 
----
-
-### ⏳ Phase 6 — Submission History
-- [ ] `controllers/submissionController.js` — getHistory, getById, getScoresOverTime
-- [ ] `routes/submissions.js` — GET `/api/submissions`
-- [ ] Tested in Postman ✓
-
----
-
-### ⏳ Phase 7 — React Frontend
-- [ ] `AuthContext.jsx` — store user + JWT in React state
-- [ ] `api.js` — all axios calls (login, register, analyze, getHistory)
-- [ ] `Login.jsx` and `Register.jsx` — forms wired to backend
-- [ ] `Home.jsx` — code editor, language selector, mode toggle, submit button
-- [ ] `ScoreCard.jsx` — displays 4 dimension scores
-- [ ] `Dashboard.jsx` — CCR chart (Recharts), language breakdown, stat cards
-- [ ] `History.jsx` — submission history table
-- [ ] `DiffView.jsx` — before/after score comparison
-
----
-
-### ⏳ Phase 8 — Dashboard & CCR
-- [ ] CCR formula finalised in `scoreCalculator.js`
-- [ ] CCR displayed relative to user's own baseline (not absolute)
-- [ ] Recharts line graph of CCR over time
-- [ ] Shareable report card (public URL, no auth required)
-- [ ] Roast Mode vs Professional Review Mode toggle in UI
-
----
-
-### ⏳ Phase 9 — Browser Extension
-- [ ] `manifest.json` — Chrome MV3 config
-- [ ] `content.js` — grabs code + language from LeetCode Monaco editor DOM
-- [ ] `popup.html` / `popup.js` — extension toolbar UI
-- [ ] `background.js` — service worker
-- [ ] Overlay panel renders analysis result inside LeetCode
-- [ ] JWT stored in Chrome extension storage for auth
-- [ ] Tested on LeetCode ✓
-
----
-
-### ⏳ Phase 10 — Deploy & Launch
-- [ ] Backend deployed to Railway or Render (free tier)
+- [ ] Backend deployed to Railway / Render
 - [ ] Frontend deployed to Vercel
-- [ ] Extension submitted to Chrome Web Store
-- [ ] Onboarding seed flow — 2 submissions at signup for instant data
-- [ ] Launch post on Reddit (r/leetcode, r/learnprogramming)
-- [ ] Launch post on LinkedIn
+- [ ] Extension published to Chrome Web Store
+- [ ] Onboarding flow for new users
 
 ---
 
@@ -209,15 +155,15 @@ Code-Roaster/
 
 ### Prerequisites
 - Node.js v18+
-- Python 3.x (for Flake8)
-- MongoDB Atlas account
-- Google Gemini API key (free at [aistudio.google.com](https://aistudio.google.com))
+- Python 3.x (for Flake8 static analysis)
+- MongoDB Atlas account (free tier)
+- Google Gemini API key — free at [aistudio.google.com](https://aistudio.google.com)
 
 ### Server Setup
 ```bash
 cd server
 npm install
-# create .env with PORT, MONGO_URI, JWT_SECRET, GEMINI_API_KEY
+# create .env — see .env.example
 node index.js
 ```
 
@@ -228,14 +174,19 @@ npm install
 npm run dev
 ```
 
+### Environment Variables
+```
+PORT=5000
+MONGO_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/code-roaster
+JWT_SECRET=your_random_secret
+GEMINI_API_KEY=your_gemini_key
+```
+
 ---
 
-## Known hiccups
+## Contributing
 
-- **Mongoose 9 async hooks** — do NOT use `next()` in pre-save hooks. Mongoose 9 handles async automatically.
-- **bcryptjs** — use v2.4.3, not v3.x. v3 broke the API.
-- **ES Modules** — all local imports need the `.js` extension explicitly.
-- **Tailwind** — use v3, not v4. `npx tailwindcss@3 init -p` for setup.
+This project is currently in active development. Feel free to open issues or submit PRs.
 
 ---
 
