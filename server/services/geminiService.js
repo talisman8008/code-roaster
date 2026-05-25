@@ -11,7 +11,8 @@ const analyzeWithGemini= async (code,lang,mode,tone)=>{
                 contents:[{parts:[{text:prompt}]}],
                 generationConfig:{
                     temperature:0.7,
-                    maxOutputTokens:1024,
+                    maxOutputTokens:4096,
+                    responseMimeType:"application/json",
                 }
             })
         }
@@ -25,10 +26,13 @@ if(!response.ok){
 const data=await response.json()
 
     const rawText=data.candidates?.[0]?.content?.parts?.[0]?.text
-
     if(!rawText) throw new Error(`No response from gemini`)
 
-    const cleaned= rawText.replace(/```json|```/g,'').trim()
+    const cleaned = rawText
+        .split('\n')
+        .filter(line => !line.trim().startsWith('```'))
+        .join('\n')
+        .trim()
 
     try{
         const parsed = JSON.parse(cleaned)

@@ -1,26 +1,12 @@
-const calculateCCR=(scores)=>{
-    const weights={
-        readability: 0.30,
-        efficiency: 0.30,
-        structure:0.20,
-        bestPractice: 0.20,
-    }
+const calculateCCR = (scores) => {
 
-    const ccr=
-        scores.readability * weights.readability + scores.efficiency * weights.efficiency + scores.structure * weights.structure
-        + scores.bestPractices * weights.bestPractices
+    const ccr =
+        (scores.readability   * 0.30) +
+        (scores.efficiency    * 0.30) +
+        (scores.structure     * 0.20) +
+        (scores.bestPractices * 0.20)
 
-    return Math.round(ccr*10)/10
+    return Math.round(ccr * 10) / 10
 }
-export default calculateCCR
 
-/*
----------------------------
-| Dimension      | Weight |
-==========================|
-| readibility    |  30%   |
-| Efficiency     |  30%   |
-| Structure      |  20%   |
-| Best Practices |  20%   |
----------------------------
- */
+export default calculateCCR

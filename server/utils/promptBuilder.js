@@ -23,7 +23,7 @@ Roast the code hard but make it specific and funny. No generic insults.`
 
 ${toneInstructions}
 
-Analyze this ${lang} code and respond ONLY with a valid JSON object in exactly this format, no extra text:
+Analyze this ${lang} code and respond ONLY with a valid JSON object in exactly this format, no extra text, keep feedback under 200 words, max 3 issues, max 2 suggestions:
 
 {
   "scores": {
@@ -32,12 +32,12 @@ Analyze this ${lang} code and respond ONLY with a valid JSON object in exactly t
     "structure": <number 0-100>,
     "bestPractices": <number 0-100>
   },
-  "feedback": "<your detailed feedback here in ${tone === 'roast' ? 'roast' : 'professional'} tone>",
+  "feedback": "<feedback under 200 words>",
   "issues": [
-    { "line": <line number or null>, "severity": "<critical|warning|info>", "message": "<issue description>" }
+    { "line": <number or null>, "severity": "<critical|warning|info>", "message": "<keep under 20 words>" }
   ],
   "suggestions": [
-    "<specific actionable improvement>"
+    "<one short actionable suggestion under 15 words>"
   ]
 }
 
@@ -46,7 +46,7 @@ Code to analyze (${lang}):
 ${code}
 \`\`\`
 
-Remember: respond ONLY with the JSON object. No markdown, no explanation outside the JSON.`
+Respond ONLY with the JSON. No markdown fences. No text outside the JSON.`
 }
 
 export default buildPrompt
