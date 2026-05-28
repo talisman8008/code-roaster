@@ -4,6 +4,7 @@ import cors from 'cors'
 import connectDB from './config/db.js'
 import authRoutes from './routes/auth.js'
 import analyzeRoutes from './routes/analyze.js'
+import submissionRoutes from './routes/submissions.js'
 
 dotenv.config()
 connectDB()
@@ -14,7 +15,7 @@ app.use(express.json())
 
 app.use('/api/auth', authRoutes)
 app.use('/api/analyze', analyzeRoutes)
-
+app.use('/api/submissions', submissionRoutes)
 app.get('/', (req, res) => {
     res.json({ message: 'Code Roaster API is running' })
 })
